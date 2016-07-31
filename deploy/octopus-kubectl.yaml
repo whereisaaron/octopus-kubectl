@@ -1,0 +1,51 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: octopus-kubectl
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  template:
+    metadata:
+      name: octopus-kubectl
+      labels: 
+        app: octopus-kubectl
+    spec:
+      containers:
+      - name: octopus-kubectl
+        image: whereisaaron/octopus-kubectl:latest
+        ports:
+        - containerPort: 22
+          name: ssh
+        volumeMounts:
+        - name: config-volume
+          # need to mount directly in this folder to keep permissions
+          mountPath: /home/octopus/.ssh
+        lifecycle:
+          postStart:
+            exec:
+              command:
+              - "/bin/bash"
+              - "-c"
+              - "chown octopus:octopus /home/octopus/.ssh;chmod 700 /home/octopus/.ssh"
+      volumes:
+      - name: config-volume
+        configMap:
+          name: octopus-kubectl
+          items:
+          - key: authorized-keys
+            path: authorized_keys
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: octopus-kubectl
+spec:
+  selector:
+    app: octopus-kubectl
+  ports:
+    - name: ssh
+      nodePort: 31800
+      port: 22
+      targetPort: ssh
+  type: NodePort
