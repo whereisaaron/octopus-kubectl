@@ -21,5 +21,6 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 # We will start and expose ssh on port 22
 EXPOSE 22
 
-# Run sshd as the main process
-ENTRYPOINT ["/usr/sbin/sshd", "-D", "-q"]
+# Add the container start script, which will start ssh
+COPY start.sh /
+ENTRYPOINT ["/start.sh"]

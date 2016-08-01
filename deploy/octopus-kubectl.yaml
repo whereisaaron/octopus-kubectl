@@ -20,6 +20,13 @@ spec:
         volumeMounts:
         - name: config-volume
           mountPath: /root/.ssh
+        lifecycle:
+          postStart:
+            exec:
+              command:
+              - "chmod"
+              - "0700"
+              - "/root/.ssh"
       volumes:
       - name: config-volume
         configMap:
