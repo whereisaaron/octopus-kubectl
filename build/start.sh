@@ -5,12 +5,12 @@
 # so the environment variables are available to kubectl
 # when Octopus uses ssh
 #
-# If the container is no running in Kubernetes or you want
+# If the container is not running in Kubernetes or you want
 # to deploy to a remote Kubernetes cluster then you should
 # mount a /root/.kube/config file to enable access
 #
 
-env | grep KUBERNETES_ >> /root/.profile
+env | grep KUBERNETES_ | sed -e 's/^/export /' >> /root/.profile
 
 #
 # Start sshd unless an alternative command supplied
