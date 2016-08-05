@@ -4,8 +4,16 @@ MAINTAINER Aaron Roydhouse <aaron@roydhouse.com>
 # Based on official mono with kubelet Kubernetes client added
 # mono and sshd is needed for the Octopus Deploy Calamari utility
 # kubectl is needed to deploy to a Kubernetes cluster
-# kubctl config file with certificates/tokens/password should be 
-# mounts from a Kubernetes secret
+#
+# When deployed into a Kubernetes cluster the Pod Service Account 
+# is automatically available, and will work with kubectl without 
+# further configuration. Or you can mount a kubctl config file 
+# with certificates/tokens/password from a Kubernetes secret
+#
+# For ssh access you need to mount a suitable file at
+# /root/.ssh/authorized_keys
+# create-config.sh will create the ConfigMap for you, and
+# the start.sh script will fix the .ssh directory permissions
 
 ENV KUBE_LATEST_VERSION="v1.3.3"
 RUN export DEBIAN_FRONTEND=noninteractive \
