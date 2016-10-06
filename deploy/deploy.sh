@@ -1,2 +1,2 @@
 #!/bin/bash
-kubectl create -f octopus-kubectl.yaml
+kubectl apply -f octopus-kubectl.yaml
