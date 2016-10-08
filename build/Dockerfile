@@ -15,7 +15,7 @@ MAINTAINER Aaron Roydhouse <aaron@roydhouse.com>
 # create-config.sh will create the ConfigMap for you, and
 # the start.sh script will fix the .ssh directory permissions
 
-ENV KUBE_LATEST_VERSION="v1.3.3"
+ENV KUBE_LATEST_VERSION="v1.3.6"
 RUN export DEBIAN_FRONTEND=noninteractive \
   && apt-get update -y \
   && apt-get install -y ssh \

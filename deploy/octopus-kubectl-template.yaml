@@ -2,15 +2,18 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: octopus-kubectl
+  namespace: $NAMESPACE
 spec:
   replicas: 1
   revisionHistoryLimit: 2
   template:
     metadata:
       name: octopus-kubectl
+      namespace: $NAMESPACE
       labels: 
         app: octopus-kubectl
     spec:
+      serviceAccountName: $SERVICEACCOUNT
       containers:
       - name: octopus-kubectl
         image: whereisaaron/octopus-kubectl:latest
@@ -39,12 +42,13 @@ apiVersion: v1
 kind: Service
 metadata:
   name: octopus-kubectl
+  namespace: $NAMESPACE
 spec:
   selector:
     app: octopus-kubectl
   ports:
     - name: ssh
-      nodePort: 31800
+      nodePort: $NODEPORT
       port: 22
       targetPort: ssh
   type: NodePort
