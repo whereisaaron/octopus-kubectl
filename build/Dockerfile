@@ -1,9 +1,10 @@
 FROM mono
 MAINTAINER Aaron Roydhouse <aaron@roydhouse.com>
 
-# Based on official mono with kubelet Kubernetes client added
+# Based on official mono with kubectl Kubernetes client added
 # mono and sshd is needed for the Octopus Deploy Calamari utility
 # kubectl is needed to deploy to a Kubernetes cluster
+# gettext-base package is added for envsubt utility
 #
 # When deployed into a Kubernetes cluster the Pod Service Account 
 # is automatically available, and will work with kubectl without 
@@ -18,7 +19,7 @@ MAINTAINER Aaron Roydhouse <aaron@roydhouse.com>
 ENV KUBE_LATEST_VERSION="v1.3.6"
 RUN export DEBIAN_FRONTEND=noninteractive \
   && apt-get update -y \
-  && apt-get install -y ssh \
+  && apt-get install -y ssh gettext-base \
   && curl -sS -L https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
   && chmod +x /usr/local/bin/kubectl \
   && apt-get autoremove -y \
