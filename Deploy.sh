@@ -3,7 +3,15 @@
 # stop on first error
 set -e
 
-# deploy from repo, combine with config
+#
+# Set environment variables to customise the deployment
+#   AUTHORIZED_KEYS_FILE
+#   NAMESPACE
+#   SERVICEACCOUNT
+#   NODEPORT 
+#
+
+# Deploy from repo, combine with config
 pushd deploy
 ./create-config.sh
 ./Deploy.sh

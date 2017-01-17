@@ -11,13 +11,11 @@
 set -e
 
 # Optionally you can set a custom name space
-if [ -z "$NAMESPACE" ]; then
-  NAMESPACE=default
-fi
+NAMESPACE=${NAMESPACE:-default}
 echo "Using namespace ${NAMESPACE}"
 
 # Used authorized_keys in this folder unless a file is specified
-AUTHORIZED_KEYS_FILE=authorized_keys
+AUTHORIZED_KEYS_FILE=${AUTHORIZED_KEYS_FILE:-authorized_keys}
 if [ "$1" != "" ]; then
   AUTHORIZED_KEYS_FILE=$1
 fi
