@@ -12,11 +12,17 @@ spec:
       namespace: ${NAMESPACE}
       labels: 
         app: octopus-kubectl
+      annotations:
+        scheduler.alpha.kubernetes.io/tolerations: '[{"key":"lifecycle", "value":"spot"}]'
     spec:
       serviceAccountName: ${SERVICEACCOUNT}
       containers:
       - name: octopus-kubectl
         image: whereisaaron/octopus-kubectl:latest
+        imagePullPolicy: Always
+        env:
+        - name: HELM_HOST
+          value: "${HELM_HOST}"
         ports:
         - containerPort: 22
           name: ssh
