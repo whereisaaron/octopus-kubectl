@@ -46,6 +46,10 @@ spec:
           items:
           - key: authorized_keys
             path: authorized_keys
+          - key: id_rsa
+            path: id_rsa
+          - key: id_rsa.pub
+            path: id_rsa.pub
       - name: aws-volume
         secret:
           secretName: octopus-kubectl
