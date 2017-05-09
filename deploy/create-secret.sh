@@ -16,8 +16,9 @@ set -e
 
 display_usage ()
 {
-  echo "Usage: $0 [--namespace=<namespace> --authkeys=<authorized_keys> --key=<key> --pubkey=<pubkey> --awscreds=<credentials>] [--help]"
+  echo "Usage: $0 [--namespace=<namespace> --sshconfig=<config> --authkeys=<authorized_keys> --key=<key> --pubkey=<pubkey> --awscreds=<credentials>] [--help]"
   echo "  Default --namespace is 'default'"
+  echo "  Default --sshconfig is 'config'"
   echo "  Default --authkeys is 'authorized_keys'"
   echo "  Default --pubkey is 'id_rsa.pub'"
   echo "  Default --key is 'id_rsa'"
@@ -33,6 +34,10 @@ case $i in
     ;;
     --authkeys=*)
     AUTHORIZED_KEY_FILE="${i#*=}"
+    shift # past argument=value
+    ;;
+    --sshconfig=*)
+    SSH_CONFIG_FILE="${i#*=}"
     shift # past argument=value
     ;;
     --key)
@@ -67,6 +72,9 @@ done
 NAMESPACE=${NAMESPACE:-default}
 echo "Using namespace ${NAMESPACE}"
 
+SSH_CONFIG_FILE=${SSH_CONFIG_FILE:-config}
+echo "Using config from ${SSH_CONFIG_FILE}"
+
 AUTHORIZED_KEYS_FILE=${AUTHORIZED_KEYS_FILE:-authorized_keys}
 echo "Using authorized_keys from ${AUTHORIZED_KEYS_FILE}"
 
@@ -87,6 +95,7 @@ SECRET_NAME=octopus-kubectl
 kubectl delete secret --ignore-not-found $SECRET_NAME --namespace=$NAMESPACE
 kubectl create secret generic $SECRET_NAME \
   --namespace=$NAMESPACE \
+  --from-file=config=${SSH_CONFIG_FILE} \
   --from-file=authorized_keys=${AUTHORIZED_KEYS_FILE} \
   --from-file=id_rsa=${PRIVATE_KEY_FILE} \
   --from-file=id_rsa.pub=${PUBLIC_KEY_FILE} \

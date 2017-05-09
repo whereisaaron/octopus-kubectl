@@ -43,10 +43,14 @@ spec:
       - name: ssh-volume
         secret:
           secretName: octopus-kubectl
+          defaultMode: 0700
           items:
+          - key: config
+            path: config
           - key: authorized_keys
             path: authorized_keys
           - key: id_rsa
+            mode: 0600
             path: id_rsa
           - key: id_rsa.pub
             path: id_rsa.pub
