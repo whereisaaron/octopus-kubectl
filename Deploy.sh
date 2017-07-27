@@ -5,6 +5,7 @@ set -e
 
 #
 # Set environment variables to customise the deployment
+#   DOCKER_IMAGE
 #   AUTHORIZED_KEYS_FILE
 #   SSH_CONFIG_FILE
 #   PUBLIC_KEY_FILE

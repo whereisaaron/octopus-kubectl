@@ -10,7 +10,7 @@
 # mount a /root/.kube/config file to enable access
 #
 
-env | grep '^\(KUBERNETES_\|HELM_\)' | sed -e 's/^/export /' >> /root/.bashrc
+env | grep '^\(KUBERNETES_\|HELM_\|DUPLICACY_\)' | sed -e 's/^/export /' >> /root/.bashrc
 
 #
 # Start sshd unless an alternative command supplied

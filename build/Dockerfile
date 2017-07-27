@@ -42,6 +42,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 # We will start and expose ssh on port 22
 EXPOSE 22
 
+# Add fixed host keys to the container, so they don't change on every restart
+ADD host-keys/ssh_host_*_key /etc/ssh/
+
 # Add the container start script, which will start ssh
 COPY start.sh /
 ENTRYPOINT ["/start.sh"]

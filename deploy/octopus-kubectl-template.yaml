@@ -18,7 +18,7 @@ spec:
       serviceAccountName: ${SERVICEACCOUNT}
       containers:
       - name: octopus-kubectl
-        image: whereisaaron/octopus-kubectl:latest
+        image: ${DOCKER_IMAGE}
         imagePullPolicy: Always
         env:
         - name: HELM_HOST
