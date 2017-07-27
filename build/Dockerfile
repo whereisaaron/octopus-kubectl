@@ -19,8 +19,9 @@ MAINTAINER Aaron Roydhouse <aaron@roydhouse.com>
 
 ENV \
   KUBE_VERSION="v1.5.2" \
-  HELM_VERSION="v2.3.1" \
+  HELM_VERSION="v2.5.1" \
   CLI53_VERSION="0.8.8" \
+  DUPLICACY_VERSION="2.0.6" \
   JQ_VERSION="1.5" \
   TERM=xterm
 
@@ -30,8 +31,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
   && curl -sS -L https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
   && curl -sS -L https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz | tar xzf - -C /usr/local/bin --strip-components=1 linux-amd64/helm \
   && curl -sS -L https://github.com/barnybug/cli53/releases/download/${CLI53_VERSION}/cli53-linux-amd64 -o /usr/local/bin/cli53 \
+  && curl -sS -L https://github.com/gilbertchen/duplicacy/releases/download/v${DUPLICACY_VERSION}/duplicacy_linux_x64_${DUPLICACY_VERSION} -o /usr/local/bin/duplicacy \
   && curl -sS -L https://github.com/stedolan/jq/releases/download/jq-${JQ_VERSION}/jq-linux64 -o /usr/local/bin/jq \
-  && chmod +x /usr/local/bin/kubectl /usr/local/bin/cli53 /usr/local/bin/jq \
+  && chmod +x /usr/local/bin/kubectl /usr/local/bin/cli53 /usr/local/bin/duplicacy /usr/local/bin/jq \
   && apt-get autoremove -y \
   && apt-get clean -y \
   && mkdir -p /var/run/sshd \
