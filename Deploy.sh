@@ -18,6 +18,6 @@ set -e
 
 # Deploy from repo, combine with config
 pushd deploy
-./create-config.sh
+./create-secret.sh
 ./Deploy.sh
 popd

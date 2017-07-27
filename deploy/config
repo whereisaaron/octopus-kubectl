@@ -1,2 +1,5 @@
 # ssh config for root
-StrictHostKeyChecking no
+Host *
+   StrictHostKeyChecking no
+   UserKnownHostsFile /dev/null
+   LogLevel ERROR

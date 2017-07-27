@@ -21,11 +21,12 @@ ENV \
   KUBE_VERSION="v1.5.2" \
   HELM_VERSION="v2.3.1" \
   CLI53_VERSION="0.8.8" \
-  JQ_VERSION="1.5"
+  JQ_VERSION="1.5" \
+  TERM=xterm
 
 RUN export DEBIAN_FRONTEND=noninteractive \
   && apt-get update -y \
-  && apt-get install -y ssh gettext-base git patch rsync p7zip \
+  && apt-get install -y ssh gettext-base git patch rsync p7zip mg \
   && curl -sS -L https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
   && curl -sS -L https://storage.googleapis.com/kubernetes-helm/helm-${HELM_VERSION}-linux-amd64.tar.gz | tar xzf - -C /usr/local/bin --strip-components=1 linux-amd64/helm \
   && curl -sS -L https://github.com/barnybug/cli53/releases/download/${CLI53_VERSION}/cli53-linux-amd64 -o /usr/local/bin/cli53 \
