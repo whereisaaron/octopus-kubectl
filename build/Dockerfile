@@ -1,3 +1,4 @@
+
 FROM mono
 MAINTAINER Aaron Roydhouse <aaron@roydhouse.com>
 
@@ -20,8 +21,8 @@ MAINTAINER Aaron Roydhouse <aaron@roydhouse.com>
 ENV \
   KUBE_VERSION="v1.5.2" \
   HELM_VERSION="v2.5.1" \
-  CLI53_VERSION="0.8.8" \
-  DUPLICACY_VERSION="2.0.6" \
+  CLI53_VERSION="0.8.12" \
+  DUPLICACY_VERSION="2.0.10" \
   JQ_VERSION="1.5" \
   TERM=xterm
 
